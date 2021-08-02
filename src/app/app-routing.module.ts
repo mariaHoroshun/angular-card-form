@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DxButtonModule } from 'devextreme-angular';
+import { DxButtonModule, DxTextAreaModule } from 'devextreme-angular';
 
 
 
@@ -8,7 +8,8 @@ import { DxButtonModule } from 'devextreme-angular';
   declarations: [],
   imports: [
     CommonModule,
-    DxButtonModule
+    DxButtonModule,
+    DxTextAreaModule
   ]
 })
 export class AppRoutingModule { }

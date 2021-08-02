@@ -4,16 +4,52 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { DxButtonModule } from 'devextreme-angular';
+import {
+  DxTextAreaModule, 
+  DxDateBoxModule,
+  DxButtonModule,
+  DxCheckBoxModule,
+  DxDataGridModule,
+  DxFormModule,
+  DxLoadPanelModule,
+  DxMenuModule,
+  DxPopupModule,
+  DxScrollViewModule,
+  DxSelectBoxModule,
+  DxSwitchModule,
+  DxTextBoxModule,
+  DxValidatorModule,
+  DxListModule,
+  DxDropDownBoxModule} from 'devextreme-angular';
+import { ExchangeCardComponent } from './exchange-card/exchange-card.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ExchangeCardComponent
   ],
   imports: [
+    FormsModule,
+    DxDateBoxModule,
+    DxTextAreaModule,
     BrowserModule,
     AppRoutingModule,
-    DxButtonModule
+    DxDataGridModule,
+    DxMenuModule,
+    DxPopupModule,
+    DxTextBoxModule,
+    DxSwitchModule,
+    DxSelectBoxModule,
+    DxCheckBoxModule,
+    DxFormModule,
+    DxButtonModule,
+    DxValidatorModule,
+    DxLoadPanelModule,
+    DxScrollViewModule,
+    DxDropDownBoxModule,
+    DxListModule,
+    DxSelectBoxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
