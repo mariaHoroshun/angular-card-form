@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "52760cd6-e021-4d43-b00c-4a951c0a3199"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -27,7 +30,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "node_modules/devextreme/dist/css/dx.common.css",
+              "node_modules/devextreme/dist/css/dx.light.css",
+              "src/styles.css",
+              "src/nrj-ui.css"
             ],
             "scripts": []
           },
