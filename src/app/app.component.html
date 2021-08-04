@@ -1,97 +1,7 @@
 <dx-button stylingMode="outlined" text="Contained" type="default" [width]="180" text="Открыть окно"
     (onClick)=showInfo()></dx-button>
 
-<dx-popup [width]="600" [height]="500" [showTitle]="true" title="Запланировать обмен с СПО «Метроскоп»"
-    [dragEnabled]="false" [closeOnOutsideClick]="true" [showCloseButton]="false" container=".dx-viewport"
-    [(visible)]="popupVisible">
-    <div class="dx-field" style="width: 500px;">
-
-        <dx-form [colCount]="2" [formData]="currentSchedule" labelLocation="top" style="height: 700px;"
-            validationGroup="taskGroup">
-
-
-            <dxi-item [template]="'isAll'" id="allStationsSwitch">
-                <dxo-label text="Все подстанции">
-                </dxo-label>
-            </dxi-item>
-
-            <div *dxTemplate="let all of 'isAll'">
-                <div class="flex-col-container">
-                    <dx-switch class="dx-field-value switch" switchedOnText=" " switchedOffText=" " style="padding-right: 235px;">
-                    </dx-switch>
-                </div>
-            </div>
-
-            <dxi-item></dxi-item>
-
-            <dxi-item [colSpan]="2" dataField="station"  editorType="dxSelectBox" [editorOptions]="
-            {
-                items: allStations,
-                searchEnabled: false
-            }">
-                <dxo-label text="Выберите объект">
-                </dxo-label>
-                <dxi-validation-rule type="required" message="Выберите станцию"></dxi-validation-rule>
-            </dxi-item>
-
-            <!--DATA-->
-
-            <dxi-item dataField="year" title="Год" editorType="dxNumberBox" [editorOptions]="{
-                min: 2019,
-                max: 2025
-                            }">
-                <dxo-label text="Год">
-                </dxo-label>
-                <dxi-validation-rule type="required" message="Заполните год"></dxi-validation-rule>
-            </dxi-item>
-
-            <dxi-item dataField="month" title="Месяц" editorType="dxNumberBox" [editorOptions]="{
-                min: 1,
-                max: 12
-                            }">
-                <dxo-label text="Месяц">
-                </dxo-label>
-                <dxi-validation-rule type="required" message="Заполните месяц"></dxi-validation-rule>
-            </dxi-item>
-
-            <dxi-item dataField="planDate" title="Плановая дата и время начала обмена" [colSpan]="2"
-                style="width: 350px;" [visible]="!currentSchedule?.startNow">
-                <dxo-label text="Плановая дата и время начала обмена">
-                </dxo-label>
-                <dxi-validation-rule type="required" message="Заполните плановую дату и время"></dxi-validation-rule>
-                <dx-date-box type="datetime">
-                </dx-date-box>
-
-            </dxi-item>
-
-            <dxi-item [template]="'isCurrentSchedule'">
-                <dxo-label text="Запустить сегодня">
-                </dxo-label>
-            </dxi-item>
-
-            <div *dxTemplate="let cur of 'isCurrentSchedule'">
-                <div class="flex-col-container">
-                    <dx-switch class="dx-field-value switch" [(value)]="currentSchedule.startNow"
-                        switchedOnText="Сегодня" switchedOffText=" " style="padding-right: 235px;">
-                    </dx-switch>
-                </div>
-            </div>
-
-        </dx-form>
-    </div>
-    <dxi-toolbar-item toolbar="bottom" location="before">
-        <dx-button stylingMode="Contained" type="default" [width]="180" text="Сохранить" (onClick)=saveInfo($event)
-            validationGroup="taskGroup">
-        </dx-button>
-    </dxi-toolbar-item>
-    <dxi-toolbar-item toolbar="bottom" location="before">
-        <dx-button stylingMode="outlined" type="default" [width]="180" text="Отмена" (onClick)=closeInfo()>
-        </dx-button>
-    </dxi-toolbar-item>
-
-</dx-popup>
-
-<div class="list-container">
+<!--<div class="list-container">
     <dx-list [items]="schedules" height="100%" itemTemplate="scheduleTemplate">
         <div *dxTemplate="let s of 'scheduleTemplate'">
             <div class="product">
@@ -101,4 +11,6 @@
 
         </div>
     </dx-list>
-</div>
+</div>-->
+
+<router-outlet></router-outlet>

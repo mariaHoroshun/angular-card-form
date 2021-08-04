@@ -21,13 +21,13 @@ import {
   DxValidatorModule,
   DxListModule,
   DxDropDownBoxModule} from 'devextreme-angular';
-import { ExchangeCardComponent } from './exchange-card/exchange-card.component';
 import { FormsModule } from '@angular/forms';
+import { ScheduleCardComponent } from './schedule-card/schedule-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ExchangeCardComponent
+    ScheduleCardComponent
   ],
   imports: [
     FormsModule,

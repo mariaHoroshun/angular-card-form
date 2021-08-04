@@ -1,0 +1,174 @@
+:root {
+    --primary-normal: #1576d6;
+    --primary-hover: #1063C2;
+    --primary-pressed: #0A51AD;
+    --primary-background: #F0F7FF;
+    --danger-normal: #DB3646;
+    --danger-hover: #C2363D;
+    --danger-pressed: #A83232;
+    --danger-background: #FFF2F3;
+    --warning-normal: #F2B230;
+    --warning-hover: #E5992E;
+    --warning-pressed: #D9822B;
+    --warning-background: #FEF7EA;
+    --success-normal: #21A690;
+    --success-hover: #208C83;
+    --success-pressed: #227373;
+    --success-background: #E9F6F4;
+    --neutral-00: #ffffff;
+    --neutral-10: #f5f5f5;
+    --neutral-20: #ebebeb;
+    --neutral-30: #e0e0e0;
+    --neutral-40: #cccccc;
+    --neutral-50: #b8b8b8;
+    --neutral-60: #999999;
+    --neutral-70: #6b6b6b;
+    --neutral-80: #4d4d4d;
+    --neutral-90: #3d3d3d;
+    --neutral-100: #232323;
+    
+    --neutral-opacity-white-00: rgba (255, 255, 255, 0);
+    --neutral-opacity-white-02: rgba (255, 255, 255, 0.2);
+    --neutral-opacity-white-08: rgba (255, 255, 255, 0.8);
+  
+    --neutral-opacity-10: rgba(35, 35, 35, 0.04);
+    --neutral-opacity-20: rgba(35, 35, 35, 0.08);
+    --neutral-opacity-30: rgba(35, 35, 35, 0.16);
+    --neutral-opacity-40: rgba(35, 35, 35, 0.24);
+    --neutral-opacity-50: rgba(35, 35, 35, 0.32);
+    --neutral-opacity-60: rgba(35, 35, 35, 0.46);
+    --neutral-opacity-70: rgba(35, 35, 35, 0.64);
+    --neutral-opacity-80: rgba(35, 35, 35, 0.8);
+    --neutral-opacity-90: rgba(35, 35, 35, 0.9);
+    
+    --button-color: #189EB7;
+    --header: #393E44;
+    --green-color: #AEDAAD;
+    --light-red-color: #ECB3B7;
+    --yellow-color: #FFFD04;
+    --focus-color:#E0F0FF;
+  
+    
+    --body-font-family: Roboto, "Helvetica Neue", sans-serif;
+    --body-color: var(--neutral-100);
+    --border-radius: 2px;
+    --button-border-radius: calc(var(--border-radius) * 2);
+    --modal-border-radius: calc(var(--border-radius) * 2);
+    --modal-box-shadow: 0px 0px 4px rgba(35, 35, 35, 0.24);
+  
+    --font-lg: 16px/24px var(--body-font-family);
+    --font-md: 14px/20px var(--body-font-family);
+    --font-sm: 12px/16px var(--body-font-family);
+  }
+  
+
+
+::ng-deep #container {
+    padding: 10px;
+}
+::ng-deep #container ul {
+    list-style-type: none;
+    text-align: center;
+}
+::ng-deep #container ul li {
+    display: inline-block;
+    width: 160px;
+    margin: 10px;
+}
+::ng-deep #container ul li img{
+    width: 100px;
+}
+::ng-deep .button-info {
+    margin: 10px;
+}
+::ng-deep .dx-popup-content p {
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.switch {
+    display: grid;
+    position: relative;
+    padding-left: 38px;
+    margin: 0;
+    cursor: pointer;
+    font: var(--font-md);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: var(--neutral-100);
+  }
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 2px;
+    left: 0;
+    width: 30px;
+    height: 18px;
+    background: var(--neutral-40);
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 9px;
+  }
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 1px;
+    bottom: 1px;
+    background-color: rgb(206, 206, 206);
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+  }
+  input:checked + .slider {
+    background-color: var(--primary-normal);
+  }
+  input:focus + .slider, input:focus + .checkmark, input:focus + .radiomark {
+    box-shadow: 0px 0px 0px 4px var(--focus-color);
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(12px);
+    -ms-transform: translateX(12px);
+    transform: translateX(12px);
+  }
+  .switch input[disabled]+.slider {
+    background-color: var(--neutral-40);
+  }
+  .switch input[disabled]+.slider:before {
+    background-color: var(--neutral-20);
+  }
+  
+  .toolbar .switch {
+    margin-right: 16px;
+  }
+
+  ::ng-deep .list-container {
+    margin-top: 50px;
+    min-height: 440px;
+    height: auto;
+}
+::ng-deep .product {
+    height: 65px;
+}
+::ng-deep .product > div {
+    padding-left: 10px;
+    vertical-align: top;
+    line-height: 65px;
+    font-size: 15px;
+    float: left;
+}
+
+.start_today{
+  float: right;
+}
