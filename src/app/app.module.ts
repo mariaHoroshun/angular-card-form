@@ -21,14 +21,25 @@ import {
   DxValidatorModule,
   DxListModule,
   DxDropDownBoxModule,
+  DxTreeListModule
 } from 'devextreme-angular';
 import { FormsModule } from '@angular/forms';
 import { ScheduleCardComponent } from './schedule-card/schedule-card.component';
+import { PlanCardComponent } from './plan-card/plan-card.component';
+import { SummaryPageComponent } from './summary-page/summary-page.component';
+import { TrsPageComponent } from './trs-page/trs-page.component';
+import { ReactorsPageComponent } from './reactors-page/reactors-page.component';
+import { MetersPageComponent } from './meters-page/meters-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ScheduleCardComponent
+    ScheduleCardComponent,
+    PlanCardComponent,
+    SummaryPageComponent,
+    TrsPageComponent,
+    ReactorsPageComponent,
+    MetersPageComponent
   ],
   imports: [
     FormsModule,
@@ -50,7 +61,8 @@ import { ScheduleCardComponent } from './schedule-card/schedule-card.component';
     DxScrollViewModule,
     DxDropDownBoxModule,
     DxListModule,
-    DxSelectBoxModule
+    DxSelectBoxModule,
+    DxTreeListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

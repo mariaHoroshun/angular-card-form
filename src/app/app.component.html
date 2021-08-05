@@ -1,24 +1,8 @@
-<!--<dx-button stylingMode="outlined" text="Contained" type="default" [width]="180" text="Открыть окно"
-    (onClick)=showInfo()></dx-button>
-
-<div class="list-container">
-    <dx-list [items]="schedules" height="100%" itemTemplate="scheduleTemplate">
-        <div *dxTemplate="let s of 'scheduleTemplate'">
-            <div class="product">
-                {{s.year}} - {{s.month}} : {{s.planDate}} - {{s.station}}
-                <div *ngIf="s.startNow" class="start_today">Запуск сегодня</div>
-            </div>
-
-        </div>
-    </dx-list>
-</div>-->
-
-<p class="test_class">Style test</p>
-
-<dx-data-grid id="tableContainer" [dataSource]="dataItems" keyExpr="ID" [showBorders]="true">
+<dx-data-grid id="tableContainer" [dataSource]="dataItems" keyExpr="ID" 
+    columnResizingMode="widget" [allowColumnResizing] = "true">
 
     <dxi-column caption="Подстанции" alignment="center">
-        <dxi-column caption="СПО Метроскоп" dataField="name" dataType="string" width="auto" cellTemplate="linkTemplate">
+        <dxi-column caption="СПО Метроскоп" dataField="name" dataType="string" cellTemplate="linkTemplate" [width]="300">
         </dxi-column>
         <dxi-column caption="АИС ОИА ПЭО" dataField="field1" dataType="string"></dxi-column>
     </dxi-column>
@@ -32,13 +16,13 @@
         <dxi-column caption="АИС ОИА ПЭО" dataField="field5" dataType="string"></dxi-column>
     </dxi-column>
 
-    <dxo-filter-row></dxo-filter-row>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
     <dxo-paging [pageSize]="5"></dxo-paging>
-    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 8, 12]"></dxo-pager>
+    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 8, 12]"  [infoText]="'Страница {0} из {1} (всего {2})'" [showInfo]="true"></dxo-pager>
 
 
     <div *dxTemplate="let d of 'linkTemplate'">
-        <a class="link" routerLink="/schedule">{{d.text}}</a>
+        <a class="link" routerLink="/plan">{{d.text}}</a>
     </div>
 
 </dx-data-grid>

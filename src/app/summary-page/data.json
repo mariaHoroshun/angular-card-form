@@ -1,0 +1,33 @@
+[{
+    "arrayData": "ТР/ТСН",
+    "status": "ОТСУТСТВУЮТ ДАННЫЕ ДЛЯ СВЯЗИ",
+    "amount1": "53453",
+    "disabled1": "0",
+    "link1": "0",
+    "amount2": "0",
+    "disabled2": "0",
+    "link2": "0",
+    "isLinked": "0"
+},{
+    "arrayData": "Реакторы",
+    "status": "ОТСУТСТВУЮТ ДАННЫЕ ДЛЯ СВЯЗИ",
+    "amount1": "0",
+    "disabled1": "0",
+    "link1": "0",
+    "amount2": "0",
+    "disabled2": "0",
+    "link2": "0",
+    "isLinked": "0"
+}
+,{
+    "arrayData": "Приборы учёта",
+    "status": "ОТСУТСТВУЮТ ДАННЫЕ ДЛЯ СВЯЗИ",
+    "amount1": "0",
+    "disabled1": "0",
+    "link1": "0",
+    "amount2": "0",
+    "disabled2": "0",
+    "link2": "0",
+    "isLinked": "0"
+}
+]

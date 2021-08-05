@@ -16,7 +16,7 @@ export class AppComponent{
   closeButtonOptions: any;
 
   showInfo() {
-    this._router.navigate(['schedule']);
+    this._router.navigate(['plan']);
   }
 
   dataItems : DataItem[];
