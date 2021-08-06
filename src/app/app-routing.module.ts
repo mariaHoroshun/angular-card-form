@@ -8,6 +8,7 @@ import { SummaryPageComponent } from './summary-page/summary-page.component';
 import { TrsPageComponent } from './trs-page/trs-page.component';
 import { ReactorsPageComponent } from './reactors-page/reactors-page.component';
 import { MetersPageComponent } from './meters-page/meters-page.component';
+import { LinkStationsComponent } from './link-stations/link-stations.component';
 
 const routes: Routes = [
   { path: 'schedule', component: ScheduleCardComponent },
@@ -15,10 +16,16 @@ const routes: Routes = [
     path: 'plan', component: PlanCardComponent,
     children: [
       { path: '', component: SummaryPageComponent },
-      { path: 'summary', component: SummaryPageComponent },
+      /*{
+          path: 'summary', component: SummaryPageComponent, children: [
+          { path: 'linkModal', component: LinkStationsComponent }
+        ]
+      },*/
+      { path: 'summary', component: SummaryPageComponent},
       { path: 'trs', component: TrsPageComponent },
       { path: 'reactors', component: ReactorsPageComponent },
-      { path: 'meters', component: MetersPageComponent }]
+      { path: 'meters', component: MetersPageComponent },
+    ]
   }
 ];
 

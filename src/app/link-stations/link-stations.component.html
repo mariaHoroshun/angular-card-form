@@ -1,0 +1,8 @@
+<dx-popup [width]="500" [height]="400" [dragEnabled]="true" [closeOnOutsideClick]="false" [showCloseButton]="false"
+    container=".dx-viewport" [(visible)]="popupVisible" [showTitle]="true" title="Связать подстанции">
+    <div class="dx-field">
+    </div>
+    <dxi-toolbar-item toolbar="bottom" location="before">
+        <button class="button button-ghost" (click)="closeLinkModal()">Отмена</button>
+    </dxi-toolbar-item>
+</dx-popup>

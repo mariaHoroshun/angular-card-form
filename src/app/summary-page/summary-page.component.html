@@ -12,10 +12,12 @@
     <span class="slider"></span>
 </label>
 <dx-button stylingMode="outlined" text="Связать" type="default"></dx-button>
+
 <h4>Оборудование подстанции</h4>
-<dx-data-grid id="table" [wordWrapEnabled]="true" [showBorders]="true" dataSource="data.json" [remoteOperations]="true"> <!--store Custom strore -->
-    <dxi-column dataField="arrayData" caption="Массив данных" [width]="80" alignment="center" class="verticalCell" style="vertical-align: middle;"></dxi-column>
-    <dxi-column dataField="status" caption="Статус" [width]="60" alignment="center"></dxi-column>
+<dx-data-grid id="table" [wordWrapEnabled]="true" [showBorders]="true" [dataSource]="dataSummaryItems" [remoteOperations]="true">
+    <dxo-scrolling mode="virtual"></dxo-scrolling>
+    <dxi-column dataField="arrayData" caption="Массив данных" [width]="90" alignment="center" class="verticalCell"></dxi-column>
+    <dxi-column dataField="status" caption="Статус" [width]="110" alignment="center" cssClass="info nrj-badge"></dxi-column>
     <dxi-column caption="СПО Метроскоп" alignment="center">
         <dxi-column dataField="amount1" caption="Количество" alignment="center"></dxi-column>
         <dxi-column dataField="disabled1" caption="Исключено из обмена" alignment="center"></dxi-column>
@@ -27,5 +29,4 @@
         <dxi-column dataField="link2" caption="Cвязать объекты с СПО Метроскоп" alignment="center"></dxi-column>
     </dxi-column>
     <dxi-column dataField="isLinked" caption="Связано" [width]="70" alignment="center"></dxi-column>
-    <dxo-scrolling mode="virtual"></dxo-scrolling>
 </dx-data-grid>

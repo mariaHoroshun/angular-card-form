@@ -30,6 +30,7 @@ import { SummaryPageComponent } from './summary-page/summary-page.component';
 import { TrsPageComponent } from './trs-page/trs-page.component';
 import { ReactorsPageComponent } from './reactors-page/reactors-page.component';
 import { MetersPageComponent } from './meters-page/meters-page.component';
+import { LinkStationsComponent } from './link-stations/link-stations.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { MetersPageComponent } from './meters-page/meters-page.component';
     SummaryPageComponent,
     TrsPageComponent,
     ReactorsPageComponent,
-    MetersPageComponent
+    MetersPageComponent,
+    LinkStationsComponent
   ],
   imports: [
     FormsModule,

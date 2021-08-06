@@ -1,9 +1,40 @@
-<h4>Трансформаторы СПО "Метроскоп". Подстанция ПС 10 кВ ЗКРП №3</h4>
-<dx-data-grid id="table" [wordWrapEnabled]="true" [showBorders]="true" >
-    <dxi-column caption = "Трансформатор" alignment="center">
-        <dxi-column caption = "СПО Метроскоп"></dxi-column>
-        <dxi-column caption = "АИС ОИА ПЭО"></dxi-column>
+<h4>Трансформаторы СПО "Метроскоп". Подстанция ПС 220 кВ Абашево</h4>
+<dx-data-grid id="mscpTable" 
+[wordWrapEnabled]="true" 
+[showBorders]="true" 
+[dataSource]="mscpTrItems">
+<dxo-selection mode="single"></dxo-selection>
+    <dxi-column caption="Трансформатор" alignment="center">
+        <dxi-column dataField="name" caption="СПО Метроскоп"></dxi-column>
+        <dxi-column dataField="isTrs" caption="АИС ОИА ПЭО"></dxi-column>
+        <!--{{name}}-->
     </dxi-column>
-    <dxi-column caption = "Связь" alignment="center"></dxi-column>
+    <dxi-column dataField="isLinked" caption="Связь" alignment="center" cellTemplate="bindButtonTemplate"></dxi-column>
+
+    <div *dxTemplate="let bb of 'bindButtonTemplate'">
+        <button (click)="bind()" class="nrj-button button-secondary"><span>Связать</span>
+        </button>
+    </div>
+
 </dx-data-grid>
-<h4>Отсутствует связь с подстанцией из АИС ОИА ПЭО</h4>
+
+<br><br>
+<h4>Трансформаторы АИС ОИА ПЭО, не связанные с СПО «Метроскоп». Подстанция Абашево.</h4>
+<dx-data-grid #aisGrid id="aisTable" 
+[wordWrapEnabled]="true" 
+[showBorders]="true" 
+[dataSource]="aisTrInfoItems"
+[allowColumnResizing]="true" columnResizingMode="widget"
+[selectedRowKeys]="[]">
+<dxo-selection mode="single"></dxo-selection>
+    <dxi-column dataField="name" caption="Наименование"></dxi-column>
+    <dxi-column dataField="type" caption="Тип"></dxi-column>
+    <dxi-column caption="Связь" alignment="center"></dxi-column>
+    <dxi-column dataField="group" caption="Группа"></dxi-column>
+    <dxi-column dataField="usedOnVn" caption="Учет на ВН" cellTemplate="usedOnVnTemplate"></dxi-column>
+    <dxi-column dataField="code" caption="Код" alignment="center"></dxi-column>
+    <div *dxTemplate="let cell of 'usedOnVnTemplate'">
+        <span *ngIf="cell.data.usedOnVn">Да</span>
+        <span *ngIf="!cell.data.usedOnVn">Нет</span>
+    </div>
+</dx-data-grid>
