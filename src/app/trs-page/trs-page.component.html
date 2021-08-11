@@ -1,38 +1,95 @@
 <h4>Трансформаторы СПО "Метроскоп". Подстанция ПС 220 кВ Абашево</h4>
 <dx-data-grid #MscpTable id="mscpTable" [wordWrapEnabled]="true" [showBorders]="true" [dataSource]="mscpTrItems"
-    (onSelectionChanged)="selectionChangedMscp($event)">
+    (onSelectionChanged)="selectionChangedMscp($event)" [masterDetail]="{ enabled: true, template: 'detail' }"
+    keyExpr="ID">
     <dxo-selection mode="single"></dxo-selection>
     <dxi-column caption="Трансформатор" alignment="center">
         <dxi-column dataField="name" caption="СПО Метроскоп"></dxi-column>
-        <dxi-column dataField="isTrs" caption="АИС ОИА ПЭО">
-            <div *ngIf="isBindedMetod()">
-                {{pickedMscpTrItem?.aisTrs[0].name}}
+        <dxi-column caption="АИС ОИА ПЭО" dataField="aisNames" cellTemplate="aisNamesTemplate"></dxi-column>
+    </dxi-column>
+    <dxi-column dataField="isLinked" caption="Связь" alignment="center" cellTemplate="buttonTemplate">
+    </dxi-column>
+
+    <div *dxTemplate="let cell of 'buttonTemplate'">
+        <button class="nrj-button button-ghost" (click)="bind()">
+            <span *ngIf="isBothSelected2(cell.data)">
+                Связать c {{pickedAisTrInfoItem?.name}}
+                
+            </span>
+        </button>
+    </div>
+
+    <div *dxTemplate="let cell of 'aisNamesTemplate'">
+        {{cell.data.aisNames}}
+    </div>
+
+    <div *dxTemplate="let childCell of 'detail'">
+        <span>{{logItem(childCell.data)}}</span>
+        <dx-data-grid [dataSource]="childCell.data.aisTrs" [remoteOperations]="false" [showBorders]="true"
+            [columnAutoWidth]="true" keyExpr="ID" columnResizingMode="widget" [allowColumnResizing]="true"
+            (onSelectionChanged)="selectionChangedMscp($event)">
+            <dxi-column dataField="ID" caption="id"></dxi-column>
+            <dxi-column dataField="name" caption="Наименование"></dxi-column>
+            <dxi-column dataField="type" caption="Тип"></dxi-column>
+            <dxi-column cellTemplate="deleteButtonTemplate" caption="Связь"></dxi-column>
+            <dxi-column dataField="group" caption="Группа"></dxi-column>
+            <dxi-column dataField="usedOnVn" caption="Учет на ВН" cellTemplate="usedOnVnTemplate"></dxi-column>
+            <dxi-column dataField="code" caption="Код" alignment="center"></dxi-column>
+
+            <div *dxTemplate="let cell of 'usedOnVnTemplate'">
+                <span *ngIf="cell.data.usedOnVn">Да</span>
+                <span *ngIf="!cell.data.usedOnVn">Нет</span>
             </div>
-        </dxi-column>
-    </dxi-column>
-    <dxi-column dataField="isLinked" caption="Связь" alignment="center" cellTemplate="bindButtonTemplate">
-    </dxi-column>
-    <div *dxTemplate="let bb of 'bindButtonTemplate'">
-        <div *ngIf="isBothSelected()">
-            <button class="nrj-button button-secondary" (click)="bind()"><span>Связать</span></button>
-        </div>
+
+            <div *dxTemplate="let cell of 'deleteButtonTemplate'">
+                <button class="nrj-button button-danger"
+                    (click)="delete(childCell.data, cell.data)"><span>Разорвать</span>
+                </button>
+            </div>
+        </dx-data-grid>
     </div>
 </dx-data-grid>
 
 <br><br>
 <h4>Трансформаторы АИС ОИА ПЭО, не связанные с СПО «Метроскоп». Подстанция Абашево.</h4>
 <dx-data-grid #aisGrid id="aisTable" [wordWrapEnabled]="true" [showBorders]="true" [dataSource]="aisTrInfoItems"
-    [allowColumnResizing]="true" columnResizingMode="widget" [selectedRowKeys]="[]"
-    (onSelectionChanged)="selectionChangedAis($event)">
+    [allowColumnResizing]="true" columnResizingMode="widget" keyExpr="ID"
+    (onSelectionChanged)="selectionChangedAis($event)" (onCellPrepared)="cellPrepared($event)">
     <dxo-selection mode="single"></dxo-selection>
-    <dxi-column dataField="name" caption="Наименование"></dxi-column>
+    <dxi-column dataField="name" caption="Наименование" [width]="100"></dxi-column>
     <dxi-column dataField="type" caption="Тип"></dxi-column>
-    <dxi-column caption="Связь" alignment="center"></dxi-column>
+    <dxi-column caption="Связь" alignment="center" cellTemplate="buttonTemplate" [width]="450"></dxi-column>
     <dxi-column dataField="group" caption="Группа"></dxi-column>
-    <dxi-column dataField="usedOnVn" caption="Учет на ВН" cellTemplate="usedOnVnTemplate"></dxi-column>
+    <dxi-column dataField="usedOnVn" caption="Учет на ВН" cellTemplate="usedOnVnTemplate" [width]="90"></dxi-column>
     <dxi-column dataField="code" caption="Код" alignment="center"></dxi-column>
+
     <div *dxTemplate="let cell of 'usedOnVnTemplate'">
         <span *ngIf="cell.data.usedOnVn">Да</span>
         <span *ngIf="!cell.data.usedOnVn">Нет</span>
     </div>
+
+
+    <div *dxTemplate="let cell of 'buttonTemplate'">
+        <div *ngIf="cell.data.usedOnVn" style="float:left">
+            <button class="nrj-button button-ghost" (click)="isAisEnable(cell.data.usedOnVn)" style="width: 100px;">
+                <span *ngIf="isCellSelected(cell.data)">
+                    Выключить
+                </span>
+            </button>
+        </div>
+
+        <div *ngIf="!cell.data.usedOnVn" style="float:left">
+            <button class="nrj-button button-ghost" (click)="isAisEnable(cell.data.usedOnVn)" style="width: 100px;">
+                <span *ngIf="isCellSelected(cell.data)">
+                    Включить
+                </span>
+            </button>
+        </div>
+        <button class="nrj-button button-ghost" (click)="bind()"><span *ngIf="isBothSelected(cell.data)"
+                style="float:left">
+                Связать с {{pickedMscpTrItem?.name}}
+            </span>
+        </button>
+    </div>
+
 </dx-data-grid>

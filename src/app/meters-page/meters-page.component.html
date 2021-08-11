@@ -1,13 +1,57 @@
-<h4>Приборы учета СПО "Метроскоп". Подстанция ПС 10 кВ ЗКРП №3</h4>
-<dx-data-grid id="table" [wordWrapEnabled]="true" [showBorders]="true" >
-    <dxi-column caption = "Прибор учета" alignment="center">
-        <dxi-column caption = "СПО Метроскоп"></dxi-column>
-        <dxi-column caption = "АИС ОИА ПЭО"></dxi-column>
+<h4>Приборы учета СПО "Метроскоп". Подстанция ПС 220 кВ Волжская</h4>
+<!--<button (click)="test()"></button>-->
+<dx-data-grid id="table" [remoteOperations]="false" keyExpr="ID" [wordWrapEnabled]="true"
+    (onSelectionChanged)="selectionChangedMscp($event)" [showBorders]="true" [dataSource]="mscpMeters">
+    <dxo-selection mode="single"></dxo-selection>
+    <dxi-column caption="Прибор учета" alignment="center">
+        <dxi-column [width]="150" caption="СПО Метроскоп" dataField="name"></dxi-column>
+        <dxi-column [width]="150" caption="АИС ОИА ПЭО" dataField="aisItem.name"></dxi-column>
     </dxi-column>
-    <dxi-column caption = "Связь" alignment="center"></dxi-column>
-    <dxi-column caption = "Модель" alignment="center"></dxi-column>
-    <dxi-column caption = "Дата начала эксплуатации" alignment="center"></dxi-column>
-    <dxi-column caption = "Дата окончания эксплуатации" alignment="center"></dxi-column>
-    <dxi-column caption = "Серийный номер" alignment="center"></dxi-column>
+    <dxi-column caption="Связь" alignment="center" cellTemplate="buttonTemplate"></dxi-column>
+    <dxi-column dataField="aisItem.model" caption="Модель" alignment="center"></dxi-column>
+    <dxi-column dataField="aisItem.startingDate" [width]="120" caption="Дата начала эксплуатации"></dxi-column>
+    <dxi-column dataField="aisItem.endingDate" [width]="120" caption="Дата окончания эксплуатации"></dxi-column>
+
+    <div *dxTemplate="let cell of 'buttonTemplate'">
+        
+        <div *ngIf="!cell.data.isLinked">
+            <button class="nrj-button button-ghost" (click)="bind()">
+                <span *ngIf="isBothSelectedMscp(cell.data)">
+                    Связать c {{pickedAisMeters?.name}}
+                </span>
+            </button>
+        </div>
+
+        <div *ngIf="cell.data.isLinked">
+            <button class="nrj-button button-danger" (click)="delete(cell.data)">
+                <span>
+                    Разорвать
+                </span>
+            </button>
+        </div>
+
+    </div>
 </dx-data-grid>
-<h4>Отсутствует связь с подстанцией из АИС ОИА ПЭО</h4>
+
+<br><br>
+<h4>Приборы учета АИС ОИА ПЭО, не связанные с СПО «Метроскоп». Подстанция Волжская (Сред-Вол).</h4>
+
+<dx-data-grid id="table" [remoteOperations]="false" keyExpr="ID" [wordWrapEnabled]="true" [showBorders]="true"
+    [dataSource]="aisMeters" (onSelectionChanged)="selectionChangedAis($event)">
+    <dxo-selection mode="single"></dxo-selection>
+    <dxi-column dataField="name"  caption="Наименование"></dxi-column>
+    <dxi-column caption="Связь" cellTemplate="buttonTemplate"></dxi-column>
+    <dxi-column dataField="model" caption="Модель"></dxi-column>
+    <dxi-column dataField="startingDate" [width]="120" caption="Дата начала эксплуатации"></dxi-column>
+    <dxi-column dataField="endingDate" [width]="120" caption="Дата окончания эксплуатации"></dxi-column>
+
+    <div *dxTemplate="let cell of 'buttonTemplate'">
+        <div *ngIf="!pickedMscpMeters?.isLinked">
+            <button class="nrj-button button-ghost" (click)="bind()">
+                <span *ngIf="isBothSelectedAis(cell.data)">
+                    Связать c {{pickedMscpMeters?.name}}
+                </span>
+            </button>
+        </div>
+    </div>
+</dx-data-grid>

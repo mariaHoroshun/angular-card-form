@@ -21,7 +21,8 @@ import {
   DxValidatorModule,
   DxListModule,
   DxDropDownBoxModule,
-  DxTreeListModule
+  DxTreeListModule,
+  DxScrollViewComponent
 } from 'devextreme-angular';
 import { FormsModule } from '@angular/forms';
 import { ScheduleCardComponent } from './schedule-card/schedule-card.component';

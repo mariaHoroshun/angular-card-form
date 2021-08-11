@@ -5,3 +5,15 @@ html{
 body{
     min-height: 100%
 }
+
+
+.dx-selection td{
+    background-color: rgba(134, 155, 154, 0.123) !important;
+}
+
+.custom-included-class{
+    background-color: rgba(151, 204, 120, 0.582) !important
+}
+.custom-excluded-class{
+    background-color: rgba(219, 146, 87, 0.479) !important
+}

@@ -1,9 +1,82 @@
-<h4>Реакторы СПО "Метроскоп". Подстанция ПС 10 кВ ЗКРП №3</h4>
-<dx-data-grid id="table" [wordWrapEnabled]="true" [showBorders]="true" >
-    <dxi-column caption = "Трансформатор" alignment="center">
-        <dxi-column caption = "СПО Метроскоп"></dxi-column>
-        <dxi-column caption = "АИС ОИА ПЭО"></dxi-column>
+<h4>Реакторы СПО "Метроскоп". Подстанция ПС 500 кВ Курдюм</h4>
+<!--First-->
+<dx-data-grid id="table" (onSelectionChanged)="selectionChangedMscp($event)" [wordWrapEnabled]="true"
+    [dataSource]="mscpReactorItems" [showBorders]="true" [masterDetail]="{ enabled: true, template: 'detail' }"
+    keyExpr="ID">
+    <dxo-selection mode="single"></dxo-selection>
+    <dxi-column caption="Трансформатор" alignment="center">
+        <dxi-column dataField="name" caption="СПО Метроскоп"></dxi-column>
+        <dxi-column dataField="aisNames" caption="АИС ОИА ПЭО" cellTemplate="aisNamesTemplate"></dxi-column>
     </dxi-column>
-    <dxi-column caption = "Связь" alignment="center"></dxi-column>
+    <dxi-column caption="Связь" alignment="center" cellTemplate="buttonTemplate"></dxi-column>
+
+    <div *dxTemplate="let cell of 'buttonTemplate'">
+        <button class="nrj-button button-ghost" (click)="bind()">
+            <span *ngIf="isBothSelectedMscp(cell.data)">
+                Связать c {{pickedAisReactor?.name}}
+            </span>
+        </button>
+    </div>
+
+    <div *dxTemplate="let cell of 'aisNamesTemplate'">
+        {{cell.data.aisNames}}
+    </div>
+
+    <div *dxTemplate="let childCell of 'detail'">
+        <span>{{logItem(childCell.data)}}</span>
+        <dx-data-grid [dataSource]="childCell.data.aisReactors" [remoteOperations]="false" [showBorders]="true"
+            [columnAutoWidth]="true" keyExpr="ID" columnResizingMode="widget" [allowColumnResizing]="true"
+            (onSelectionChanged)="selectionChangedAis($event)">
+            <dxi-column dataField="name" caption="Наименование" alignment="center"></dxi-column>
+            <dxi-column dataField="type" caption="Тип" alignment="center"></dxi-column>
+            <dxi-column dataField="voltage" caption="Напряжение, кВ" alignment="center"></dxi-column>
+            <dxi-column caption="Связь" alignment="center" cellTemplate="deleteButtonTemplate"></dxi-column>
+            <dxi-column dataField="code" caption="Код" alignment="center"></dxi-column>
+
+            <div *dxTemplate="let cell of 'deleteButtonTemplate'">
+                <button class="nrj-button button-danger"
+                    (click)="delete(childCell.data, cell.data)"><span>Разорвать</span>
+                </button>
+            </div>
+        </dx-data-grid>
+    </div>
 </dx-data-grid>
-<h4>Отсутствует связь с подстанцией из АИС ОИА ПЭО</h4>
+
+
+<!-- Second-->
+<br><br>
+<h4>Реакторы АИС ОИА ПЭО, не связанные с СПО «Метроскоп». Подстанция Курдюм.</h4>
+<dx-data-grid id="table" [wordWrapEnabled]="true" 
+[allowColumnResizing]="true" columnResizingMode="widget" keyExpr="ID"
+[showBorders]="true" [dataSource]="aisReactorItems"
+(onSelectionChanged)="selectionChangedAis($event)" (onCellPrepared)="cellPrepared($event)" (onRowPrepared)="rowPrepared($event)" 
+[class.custom-included-class]="isSelectedRowIncluded == true "
+[class.custom-excluded-class]="isSelectedRowIncluded == false">
+    <dxo-selection mode="single"></dxo-selection>
+    <dxi-column dataField="name" caption="Наименование"></dxi-column>
+    <dxi-column dataField="type" caption="Тип"></dxi-column>
+    <dxi-column dataField="voltage" caption="Напряжение, кВ" [width]="150" alignment="center"></dxi-column>
+    <dxi-column caption="Связь" alignment="center" [width]="480" cellTemplate="buttonTemplate"></dxi-column>
+    <dxi-column dataField="code" caption="Код" alignment="center" [width]="80"></dxi-column>
+    
+    <div *dxTemplate="let cell of 'buttonTemplate'" class="modal-content-row">
+        <div *ngIf="isCellSelected(cell.data)">
+            <button class="nrj-button button-ghost" (click)="switchAis(cell.data.isEnabled)" style="width: 100px;" 
+                *ngIf="cell.data.isEnabled" >
+                Исключить
+            </button>
+        
+            <button class="nrj-button button-ghost" (click)="switchAis(cell.data.isEnabled)" style="width: 100px;" 
+                *ngIf="!cell.data.isEnabled" >
+                <span *ngIf="isCellSelected(cell.data)">
+                    Включить
+                </span>
+            </button>
+        </div>
+
+        <button class="nrj-button button-ghost" (click)="bind()" *ngIf="isBothSelectedAis(cell.data)">
+                Связать с {{pickedMscpReactor?.name}}
+        
+        </button>
+    </div>
+</dx-data-grid>

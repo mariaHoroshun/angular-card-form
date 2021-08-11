@@ -98,7 +98,7 @@
     fill: var(--danger-pressed);
   }
   svg.warning {
-    fill: var(--warning-normal);
+    fill: var(--warning-normal) !important;
   }
   svg.warning:hover {
     fill: var(--warning-pressed);
@@ -1186,3 +1186,5 @@
   .check{
     color:#0A51AD
   }
+  /**/
+ 

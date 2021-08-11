@@ -2,7 +2,7 @@
     container=".dx-viewport" [(visible)]="popupVisible" [showTitle]="true"
     title="Карточка подстанции Метроскоп - ПС 10 кВ ЗКРП №3">
     <!---->
-    <div class="dx-field">
+    <div class="dx-field" style="overflow: auto; height: 550px;">
 
         <ul class="nrj-tabbar">
             <li [routerLinkActive]="['selected']" [routerLinkActiveOptions]="{ exact: false }" routerLink="summary">
@@ -19,11 +19,4 @@
     <dxi-toolbar-item toolbar="bottom" location="before">
         <button class="button button-ghost" (click)="closeInfo()">Закрыть</button>
     </dxi-toolbar-item>
-    <!--<dxi-toolbar-item toolbar="bottom" location="before">
-        <div class="modal-footer" style="width: 100%;">
-            <footer>
-                <button class="button button-ghost" (click)="closeInfo()">Закрыть</button>
-            </footer>
-        </div>
-    </dxi-toolbar-item>-->
 </dx-popup>
